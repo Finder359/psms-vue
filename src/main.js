@@ -7,7 +7,7 @@ import Storage from 'vue-ls'
 import router from './router'
 import store from './store/'
 import { VueAxios } from "@/utils/request"
-// import BaiduMap from 'vue-baidu-map'
+import BaiduMap from 'vue-baidu-map'
 require('@jeecg/antd-online-mini')
 require('@jeecg/antd-online-mini/dist/OnlineForm.css')
 
@@ -58,10 +58,10 @@ Vue.use(Print)
 Vue.use(vueBus);
 Vue.use(JeecgComponents);
 // Vue.use(VueAreaLinkage);
-// Vue.use(BaiduMap, {
-//   // ak 是在百度地图开发者平台申请的密钥 详见 http://lbsyun.baidu.com/apiconsole/key */
-//    ak: 'jpdX5xQ4hioihYepstKk1IDBRb2HNGL1'
-// })
+Vue.use(BaiduMap, {
+  // ak 是在百度地图开发者平台申请的密钥
+  ak: 'BMWTDvnps7p894ED8UcZGUlqsl8mHnrZ'
+})
 SSO.init(() => {
   main()
 })

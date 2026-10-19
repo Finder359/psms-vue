@@ -44,16 +44,16 @@ export default {
   data() {
     return {
       companyCardData: {
-        companyNum: '',
-        pointNum: ''
+        companyNum: 0,
+        pointNum: 0
       },
       cdData: {
-        a1: '',
-        a2: ''
+        a1: 0,
+        a2: 0
       },
       qyData: {
-        a1: '',
-        a2: ''
+        a1: 0,
+        a2: 0
       },
       pkData: {
         offline: 0,
@@ -74,15 +74,24 @@ export default {
   },
   computed: {
     pkOline() {
-      let value = (this.pkData.onlineTime / this.pkData.total) * 100
+      const onlineTime = Number(this.pkData && this.pkData.onlineTime) || 0
+      const total = Number(this.pkData && this.pkData.total) || 0
+      if (!total) return '0'
+      let value = (onlineTime / total) * 100
       return `${Number(value.toString().match(/^\d+(?:\.\d{0,2})?/))}`
     },
     qyPercent() {
-      let value = (this.qyData.a2 / this.qyData.a1) * 100
+      const a1 = Number(this.qyData && this.qyData.a1) || 0
+      const a2 = Number(this.qyData && this.qyData.a2) || 0
+      if (!a1) return '0'
+      let value = (a2 / a1) * 100
       return `${Number(value.toString().match(/^\d+(?:\.\d{0,2})?/))}`
     },
     cdPercent() {
-      let value = (this.cdData.a2 / this.cdData.a1) * 100
+      const a1 = Number(this.cdData && this.cdData.a1) || 0
+      const a2 = Number(this.cdData && this.cdData.a2) || 0
+      if (!a1) return '0'
+      let value = (a2 / a1) * 100
       return `${Number(value.toString().match(/^\d+(?:\.\d{0,2})?/))}`
     }
   },
@@ -90,38 +99,51 @@ export default {
      getCardData() {
        getAction(this.url.companyList)
         .then(res => {
-          this.companyCardData.companyNum = res
+          this.companyCardData.companyNum = Number(res) || 0
         })
         .catch(err => {
-          err
+          this.companyCardData.companyNum = 0
         })
        getAction(this.url.pointList)
         .then(res => {
-          this.companyCardData.pointNum = res
+          this.companyCardData.pointNum = Number(res) || 0
         })
         .catch(err => {
-          err
+          this.companyCardData.pointNum = 0
         })
        getAction(this.url.qyList)
         .then(res => {
-          this.qyData = res.result
+          const result = (res && res.result) || {}
+          this.qyData = {
+            a1: Number(result.a1) || 0,
+            a2: Number(result.a2) || 0
+          }
         })
         .catch(err => {
-          err
+          this.qyData = { a1: 0, a2: 0 }
         })
        getAction(this.url.cdList)
         .then(res => {
-          this.cdData = res.result
+          const result = (res && res.result) || {}
+          this.cdData = {
+            a1: Number(result.a1) || 0,
+            a2: Number(result.a2) || 0
+          }
         })
         .catch(err => {
-          err
+          this.cdData = { a1: 0, a2: 0 }
         })
        getAction(this.url.pkList, { hours: '-3' })
         .then(res => {
-          this.pkData = res.result
+          const result = (res && res.result) || {}
+          this.pkData = {
+            offline: Number(result.offline) || 0,
+            onlineTime: Number(result.onlineTime) || 0,
+            total: Number(result.total) || 0
+          }
         })
         .catch(err => {
-          err
+          this.pkData = { offline: 0, onlineTime: 0, total: 0 }
         })
     }
   }

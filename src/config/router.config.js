@@ -13,6 +13,12 @@ export const asyncRouterMap = [
     meta: { title: '首页' },
     redirect: '/dashboard/analysis',
     children: [
+      {
+        path: '/aiops/work-order',
+        name: 'aiops-work-order',
+        component: () => import('@/views/aiops/WorkOrder'),
+        meta: { title: '运维工单', icon: 'tool', permission: ['dashboard'] }
+      }
 
       // // dashboard
       // {
@@ -319,7 +325,7 @@ export const constantRouterMap = [
         path: 'alteration',
         name: 'alteration',
         component: () => import(/* webpackChunkName: "user" */ '@/views/user/alteration/Alteration')
-      },
+      }
     ]
   },
 
@@ -358,7 +364,7 @@ export const constantRouterMap = [
         path: 'login',
         name: 'login',
         component: () => import(/* webpackChunkName: "oauth2-app.login" */ '@/views/user/oauth2/OAuth2Login')
-      },
+      }
     ]
   },
 
@@ -377,6 +383,6 @@ export const constantRouterMap = [
   {
     path: '/404',
     component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404')
-  },
+  }
 
 ]

@@ -1,7 +1,6 @@
 <template>
   <div class="map-box">
     <baidu-map
-      ak="jpdX5xQ4hioihYepstKk1IDBRb2HNGL1"
       class="map"
       :zoom="15"
       :scroll-wheel-zoom="true"

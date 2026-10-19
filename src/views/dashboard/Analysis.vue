@@ -150,14 +150,10 @@
         </a-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6" :style="{ paddingLeft: '10px' }">
-        <a-card style="padding:0">
+        <a-card style="padding:0; cursor:pointer" @click="goMore(8)">
           <div class="title-name">
             <img src="../../assets/btitle4.png" alt="" />
-            <div>
-              <a style="float:left;font-size:18px;color:#666" slot="extra" href="#" @click="goMore(8)">
-                更多 <a-icon type="step-forward" />
-              </a>
-            </div>
+            <div class="bottom-card-tag">运维工单</div>
           </div>
         </a-card>
       </a-col>
@@ -191,22 +187,22 @@ export default {
         four: '指在24小时内至少向服务器上报过一条数据包的所有测点数与排口测点总数的占比。'
       },
       cardData: {
-        cateringAdd: '32', //餐饮企业本月新增
-        cateringTotal: '32', //餐饮企业累计数量
-        pointAdd: '32', //排扣测点数
-        pointTotal: '32', //排扣累计数量
-        appearAdd: '0', //上报数据流量
-        appearTotal: '0', //累计上报
-        interNetOnline: '0', //在线数量
-        offLine: '0' //离线数量
+        cateringAdd: '32', // 餐饮企业本月新增
+        cateringTotal: '32', // 餐饮企业累计数量
+        pointAdd: '32', // 排扣测点数
+        pointTotal: '32', // 排扣累计数量
+        appearAdd: '0', // 上报数据流量
+        appearTotal: '0', // 累计上报
+        interNetOnline: '0', // 在线数量
+        offLine: '0' // 离线数量
       },
-      //餐饮企业数
+      // 餐饮企业数
       cateringList: {},
-      //排口测点数
+      // 排口测点数
       pointList: {},
-      //上报数据流量
+      // 上报数据流量
       appearLsit: {},
-      //测点联网率
+      // 测点联网率
       onlineList: {},
       url: {
         cateringList: '/home/statCompany',
@@ -223,7 +219,7 @@ export default {
   },
   computed: {},
   methods: {
-    //获取卡片数据
+    // 获取卡片数据
     getCardData() {
       getAction(this.url.cateringList).then(res => {
         this.cateringList = res.result
@@ -241,43 +237,43 @@ export default {
     goMore(data) {
       if (data == 1) {
         this.$router.push({
-          //餐饮企业
+          // 餐饮企业
           name: 'InstantAccess-CompanyList'
         })
       } else if (data == 2) {
         this.$router.push({
-          //测点设备
+          // 测点设备
           name: 'InstantAccess-PointList'
         })
       } else if (data == 3) {
         this.$router.push({
-          //数据查询
+          // 数据查询
           name: 'OnlineMonitor-DataList'
         })
       } else if (data == 4) {
         this.$router.push({
-          //测点接入
+          // 测点接入
           name: 'InstantAccess-PointRegist'
         })
       } else if (data == 5) {
-        //运维管理 list 1
+        // 运维管理 list 1
         this.$router.push({
           name: 'aiops-Management'
         })
       } else if (data == 6) {
-        //运维报告
+        // 运维报告
         this.$router.push({
           name: 'aiops-OpsReport'
         })
       } else if (data == 7) {
-        //告警反馈
+        // 告警反馈
         this.$router.push({
           name: 'supervision-Warning'
         })
       } else if (data == 8) {
-        //运维管理 list 1
+        // 运维工单
         this.$router.push({
-          name: 'aiops-Management'
+          name: 'aiops-work-order'
         })
       }
     },
@@ -362,6 +358,17 @@ export default {
     position: absolute;
     right: 2%;
   }
+}
+.bottom-card-tag {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 .mr5 {
   margin-right: 5%;
