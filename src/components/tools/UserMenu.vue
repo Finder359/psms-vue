@@ -69,6 +69,7 @@
       </a-menu>
     </a-dropdown> -->
     <span class="action">
+      <span v-if="isDesktop()" class="welcome-user">欢迎：{{ nickname() }}</span>
       <a class="logout_title" href="javascript:;" @click="handleLogout">
         <a-icon type="logout"/>
         <span v-if="isDesktop()">&nbsp;退出登录</span>
@@ -276,5 +277,9 @@
   .logout_title {
     color: inherit;
     text-decoration: none;
+  }
+
+  .welcome-user {
+    margin-right: 8px;
   }
 </style>

@@ -628,10 +628,15 @@ export default {
         const url = requests[index]
         return getAction(url, params).then((res) => {
           if (res && res.success !== false) {
-            const { rows, total } = this.parsePageResult(res)
-            this.list = rows
-            this.ipagination.total = total
-            this.rebuildSummary(rows)
+            const { rows } = this.parsePageResult(res)
+            let displayRows = rows
+            const isRepairRole = this.roleCodes.includes('4') || String(this.currentUsername || '').trim() === '4'
+            if (isRepairRole) {
+              displayRows = rows.filter(item => String(item.assignTo || '') === String(this.currentUsername || ''))
+            }
+            this.list = displayRows
+            this.ipagination.total = displayRows.length
+            this.rebuildSummary(displayRows)
             return true
           }
           return false
