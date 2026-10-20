@@ -1,135 +1,174 @@
-Ant Design Jeecg Vue
-====
+# 餐饮业油烟在线大数据监控平台（前端）
 
-当前最新版本： 2.4.6（发布日期：20210816）
+这是一个基于 Vue 2 + Ant Design Vue 的餐饮业油烟监管前端项目，面向餐饮企业、排口测点、实时监测、超标告警、风险评估和运维管理等场景，主要用于构建“餐饮业油烟在线大数据监控平台”。该项目基于 Jeecg 体系的前端模板进行定制，采用前后端分离架构，并结合菜单权限、表格、地图/数据可视化组件与统一的后台接口调用方式。
 
-Overview
-----
+## 项目定位
 
-基于 [Ant Design of Vue](https://vuecomponent.github.io/ant-design-vue/docs/vue/introduce-cn/) 实现的 Ant Design Pro  Vue 版
-Jeecg-boot 的前端UI框架，采用前后端分离方案，提供强大代码生成器的低代码平台。
-前端页面代码和后端功能代码一键生成，不需要写任何代码，保持jeecg一贯的强大！！
+该系统覆盖了餐饮业油烟排放监管的典型业务流程，包括：
 
+- 餐饮企业档案录入与管理
+- 即时接入与测点注册
+- 在线监测与历史数据查询
+- 排放超标告警与风险评估
+- 告警申诉、审核与报备审核
+- 数据汇总、趋势分析和报表展示
+- 运维工单、权限管理与系统维护
 
+本仓库仅包含前端应用，实际运行需要配合后端接口服务。
 
-#### 前端技术
- 
-- 基础框架：[ant-design-vue](https://github.com/vueComponent/ant-design-vue) - Ant Design Of Vue 实现
-- JavaScript框架：Vue
-- Webpack
-- node
-- yarn
-- eslint
-- @vue/cli 3.2.1
-- [vue-cropper](https://github.com/xyxiao001/vue-cropper) - 头像裁剪组件
-- [@antv/g2](https://antv.alipay.com/zh-cn/index.html) - Alipay AntV 数据可视化图表
-- [Viser-vue](https://viserjs.github.io/docs.html#/viser/guide/installation)  - antv/g2 封装实现
+## 核心功能
 
+- 企业与测点管理
+  - 餐饮企业录入、查询、列表展示、注册新企业
+  - 监测点设备接入、编辑和查询
 
+- 实时监控
+  - 在线监测页面展示各测点状态、排放值和趋势
+  - 数据地图、卡片、列表等多视图展示
 
-项目下载和运行
-----
+- 告警与风险
+  - 排放超标告警
+  - 疑似故障告警与设备停机事件
+  - 风险企业评估和标签管理
 
-- 拉取项目代码
+- 监管与审核
+  - 告警反馈、申诉审核、报备申请审核
+  - 监管人员工作台与处理流程
+
+- 数据分析
+  - 饼图、柱状图、曲线图等可视化统计
+  - 设备联网率、数据上报量、企业接入趋势等分析
+
+- 运维支持
+  - 工单处理、系统监控和维护管理
+
+## 技术栈
+
+- Vue 2.6
+- Vue CLI 3
+- Ant Design Vue 1.x
+- Vue Router / Vuex
+- Axios
+- ECharts / AntV / Viser-vue
+- Less
+- ESLint
+
+## 目录结构
+
+```text
+.
+├── public                 # 静态资源
+├── src
+│   ├── api                # 接口封装
+│   ├── assets             # 图片、样式、静态资源
+│   ├── components         # 公共组件
+│   ├── config             # 全局配置、路由配置
+│   ├── mixins             # 混入
+│   ├── router             # 路由定义
+│   ├── store              # Vuex 状态管理
+│   ├── utils              # 工具函数
+│   ├── views              # 业务页面
+│   ├── App.vue
+│   ├── main.js
+│   └── permission.js
+├── .env                  # 环境变量模板
+├── .env.development      # 开发环境配置
+├── .env.production       # 生产环境配置
+├── babel.config.js
+├── Dockerfile
+├── package.json
+├── vue.config.js
+├── README.md
+└── LICENSE
+```
+
+## 环境要求
+
+- Node.js 12+（建议使用稳定版本）
+- npm 或 yarn
+- 兼容 Vue CLI 3 的前端构建环境
+
+## 安装与运行
+
+1. 安装依赖
+
 ```bash
-git clone https://github.com/zhangdaiscott/jeecg-boot.git
-cd  jeecg-boot/ant-design-vue-jeecg
-```
-
-- 安装依赖
-```
+npm install
+# 或
 yarn install
 ```
 
-- 开发模式运行
-```
+2. 启动开发服务器
+
+```bash
+npm run serve
+# 或
 yarn run serve
 ```
 
-- 编译项目
-```
+3. 构建生产包
+
+```bash
+npm run build
+# 或
 yarn run build
 ```
 
-- Lints and fixes files
-```
+4. 代码检查
+
+```bash
+npm run lint
+# 或
 yarn run lint
 ```
 
+## 环境变量
 
+项目中使用了基础环境变量配置，主要包括后端接口地址，例如：
 
-其他说明
-----
-
-- 项目使用的 [vue-cli3](https://cli.vuejs.org/guide/), 请更新您的 cli
-
-- 关闭 Eslint (不推荐) 移除 `package.json` 中 `eslintConfig` 整个节点代码
-
-- 修改 Ant Design 配色，在文件 `vue.config.js` 中，其他 less 变量覆盖参考 [ant design](https://ant.design/docs/react/customize-theme-cn) 官方说明
-```ecmascript 6
-  css: {
-    loaderOptions: {
-      less: {
-        modifyVars: {
-          /* less 变量覆盖，用于自定义 ant design 主题 */
-
-          'primary-color': '#F5222D',
-          'link-color': '#F5222D',
-          'border-radius-base': '4px',
-        },
-        javascriptEnabled: true,
-      }
-    }
-  }
+```env
+NODE_ENV=development
+VUE_APP_API_BASE_URL=http://localhost:8080/psms
+VUE_APP_CAS_BASE_URL=http://cas.example.org:8443/cas
+VUE_APP_ONLINE_BASE_URL=http://fileview.jeecg.com/onlinePreview
 ```
 
+说明：
 
+- `VUE_APP_API_BASE_URL` 为后端 API 基础地址
+- 应与实际后端服务地址保持一致
+- 生产环境请根据部署情况修改 `.env.production`
 
-附属文档
-----
-- [Ant Design Vue](https://vuecomponent.github.io/ant-design-vue/docs/vue/introduce-cn)
+## 运行说明
 
-- [报表 viser-vue](https://viserjs.github.io/demo.html#/viser/bar/basic-bar)
+- 本项目默认依赖后台接口服务，前端不能单独完成业务闭环
+- 需先启动后端服务，并保证 API 地址与前端配置一致
+- 项目使用了 `cross-env` 和 `NODE_OPTIONS=--openssl-legacy-provider`，在较新版本 Node 环境下可能需要注意兼容性
 
-- [Vue](https://cn.vuejs.org/v2/guide)
+## 常用脚本
 
-- [路由/菜单说明](https://github.com/zhangdaiscott/jeecg-boot/tree/master/ant-design-vue-jeecg/src/router/README.md)
+```json
+{
+  "scripts": {
+    "serve": "cross-env NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
+    "build:test": "cross-env NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build --mode test",
+    "lint": "vue-cli-service lint"
+  }
+}
+```
 
-- [ANTD 默认配置项](https://github.com/zhangdaiscott/jeecg-boot/tree/master/ant-design-vue-jeecg/src/defaultSettings.js)
+## 备注
 
-- 其他待补充...
+- 这是一个融合监管业务流程与前端管理系统的定制化项目，不是通用模板示例
+- 代码中包含大量业务模块，如企业录入、在线监测、告警审核、风险判定等
+- 若要进行二次开发，建议优先确认后端接口协议和数据字段结构
 
+## 相关资源
 
-备注
-----
+- [Vue 2 官方文档](https://cn.vuejs.org/v2/guide/)
+- [Ant Design Vue](https://ant-design-vue.gitee.io/docs/vue/introduce-cn/)
+- [Vue CLI](https://cli.vuejs.org/zh/)
+- [Jeecg 低代码平台](https://github.com/zhangdaiscott/jeecg-boot)
 
-> @vue/cli 升级后，eslint 规则更新了。由于影响到全部 .vue 文件，需要逐个验证。既暂时关闭部分原本不验证的规则，后期维护时，在逐步修正这些 rules
-
-
-Docker 镜像使用
-----
-
- ``` 
-# 1.修改前端项目的后台域名
-    .env.development
-    域名改成： http://jeecg-boot-system:8080/jeecg-boot
-   
-# 2.先进入打包前端项目
-  yarn run build
-
-# 3.构建镜像
-  docker build -t nginx:jeecgboot .
-
-# 4.启动镜像
-  docker run --name jeecg-boot-nginx -p 80:80 -d nginx:jeecgboot
-
-# 5.配置host
-
-    # jeecgboot
-    127.0.0.1   jeecg-boot-redis
-    127.0.0.1   jeecg-boot-mysql
-    127.0.0.1   jeecg-boot-system
-  
-# 6.访问前台项目
-  http://localhost:80
-``` 
+如果你需要，我也可以继续把这个 README 改成更偏“企业级项目说明”或“中文部署手册”风格。
